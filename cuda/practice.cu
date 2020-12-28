@@ -6,13 +6,17 @@ void add(int n, float *x, float *y)
 {
   int index = blockIdx.x * blockDim.x + threadIdx.x;
   int stride = blockDim.x * gridDim.x;
-  for (int i = index; i < n; i += stride)
+  int count = 0;
+  for (int i = index; i < n; i += stride){
+    printf("count : %d\n",count ++);
     y[i] = x[i] + y[i];
+  }
+
 }
 
 int main(void)
 {
-  int N = 1<<20;
+  int N = 1<<12;
   float *x, *y;
 
   // Allocate Unified Memory – accessible from CPU or GPU
